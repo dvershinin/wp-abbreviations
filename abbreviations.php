@@ -2,10 +2,10 @@
 /*
 Plugin Name: Abbreviations
 Description: Wrap abbreviations for search engine optimization and support other applications
-Version: 1.4
+Version: 1.5
 Author: Danila Vershinin
-Author URI: https://www.smartycode.com/
-Regex101: https://regex101.com/r/lT0lS9/1
+Author URI: https://github.com/dvershinin
+Regex101: https://regex101.com/r/aWv95u/1
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
@@ -15,8 +15,7 @@ add_filter('the_content', function($content) {
     foreach ($abbreviations as $abbr) {
         $lang = ($abbr[2] == '') ? '' : 'lang="' . esc_attr( $abbr[2] ) . '"';
         $content = preg_replace(
-             // '@([^<abbr.*>]\s+)'. $abbreviation .'(\s+[^</abbr])@si', incorrect PCRE, will not inverse match existing abbr
-            '/((?!<abbr.*>)(?:^|\s+))' . $abbr[0] . '((?:,?|.?)\s+(?!<\/abbr>))/s',
+            '/((?!<abbr.*>)(?:^|\s+|>))' . $abbr[0] . '((?:[.,>]|$|\s+)(?!<\/abbr>))/s',
             '$1<abbr class="nocode" title="' . esc_attr( $abbr[1] ) . '" ' . $lang . '>' . esc_html( $abbr[0] ) . '</abbr>$2',
             $content, 1);
     }
