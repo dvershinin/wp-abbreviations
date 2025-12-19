@@ -9,7 +9,7 @@
  * @wordpress-plugin
  * Plugin Name: Abbreviations
  * Description: Wrap abbreviations for search engine optimization and support other applications
- * Version: 1.6
+ * Version: 1.6.1
  * Author: Danila Vershinin
  * Author URI: https://github.com/dvershinin
  * Requires at least: 4.6

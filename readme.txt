@@ -5,7 +5,7 @@ Tags: abbreviation, seo, accessibility, abbr, html
 Requires at least: 4.6
 Requires PHP: 7.0
 Tested up to: 6.7
-Stable tag: 1.6
+Stable tag: 1.6.1
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -23,6 +23,9 @@ By wrapping abbreviations in the therefor "abbr" HTML element, along with a titl
 Search engines will read the abbreviation and the description which increases the chance for more relevance by specific terms used on search engines like Google.
 
 == Changelog ==
+
+= 1.6.1 =
+* Fixed: Removed development files from plugin distribution
 
 = 1.6 =
 * Performance: Single-pass regex now matches ALL abbreviations in one scan (O(1) instead of O(n))
