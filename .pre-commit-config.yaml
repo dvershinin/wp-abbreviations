@@ -1,0 +1,45 @@
+# Pre-commit hooks for Abbreviations Plugin
+# Install: pip install pre-commit && pre-commit install
+# Run manually: pre-commit run --all-files
+
+repos:
+  # PHP syntax check
+  - repo: https://github.com/digitalpulp/pre-commit-php
+    rev: 1.4.0
+    hooks:
+      - id: php-lint
+        files: \.php$
+
+  # Check for common issues in text files
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: \.min\.(js|css)$
+      - id: end-of-file-fixer
+        exclude: \.min\.(js|css)$
+      - id: check-yaml
+      - id: check-json
+      - id: mixed-line-ending
+        args: ['--fix=lf']
+
+  # PHPCS (WordPress coding standards)
+  - repo: local
+    hooks:
+      - id: phpcs
+        name: PHP CodeSniffer
+        entry: bash -c 'PHPCS="$HOME/.composer/vendor/bin/phpcs"; if [ -x "$PHPCS" ]; then "$PHPCS" "$@"; else echo "phpcs not installed"; fi' --
+        language: system
+        files: \.php$
+        exclude: ^tests/
+
+  # PHPStan (static analysis)
+  - repo: local
+    hooks:
+      - id: phpstan
+        name: PHPStan
+        entry: bash -c 'if command -v phpstan &> /dev/null; then phpstan analyse --no-progress; else echo "phpstan not installed"; fi'
+        language: system
+        files: \.php$
+        exclude: ^tests/
+        pass_filenames: false
